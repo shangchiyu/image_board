@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" media="screen" href="/style.css">
+</head>
+<body>
+
+    <div id="main">
+        <h1 class="imageboardtitle">#IMAGEBOARD</h1>
+
+
+        <div class="formcontainer">
+        <form>
+            <input v-model ='form.title'type = 'text' name = 'title' placeholder="title"  class="input">
+             <input v-model ='form.description' type = 'text' name = 'description' placeholder="description" class="input">
+            <input v-model ='form.username' type = 'text' name = 'username' placeholder="username" class="input">
+            <input type = 'file' accept= 'image/*' @change = 'handleFileChange'name ='file' class="handleFileChange">
+            <button @click = 'uploadFile' class= "uploadFile">upload</button>
+        </form>
+        </div>
+        <div>
+            <popwindow v-if= "currentImage":id="currentImage" @hideimage="hideImage" class="popwindow"></popwindow>
+        </div>
+
+            <div class = "images-container" v-for ='image in images'@click='showImage(image.id)' >
+
+                    <img :src = "image.url" alt="">
+                    <p>{{image.title}}</p>
+
+
+            </div>
+
+
+    </div>
+    <!-- when user clicks run function myFn (this is note)-->
+
+
+    <script id="modal-template" type="text/x-template">
+        <div class="imgorverlay">
+
+            <div id= "imagepop">
+                <div @click='closeCompo'><h1 class="close">X</h1>
+                </div>
+
+                <img class="image" :src="url">
+                <h2> {{ title }} </h2>
+                <h3> {{ description }} </h3>
+                <p> {{ username }} </p>
+                <label for="comments">comments:</label>
+                <input type="text" id="comments" name="comments"
+        size="80"><button class="submit2" type="button">submit
+    </button>
+
+
+            </div>
+        </div>
+
+    </script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
+
+
+</body>
+</html>
